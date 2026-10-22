@@ -1,37 +1,40 @@
-# 💰 Financial Opportunity Processing & Eligibility API
+# Financial Opportunity Processing & Eligibility API 💰
 
 ### A Data-Driven Investment Opportunity Screening and Ranking Service
 
+A Python REST API built with FastAPI that processes financial opportunity data, evaluates investment eligibility against user-defined criteria, and ranks qualifying opportunities using a transparent weighted-scoring model.
+
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10+-blue?logo=python" alt="Python"/>
-  <img src="https://img.shields.io/badge/FastAPI-REST%20API-009688?logo=fastapi" alt="FastAPI"/>
-  <img src="https://img.shields.io/badge/Pandas-Data%20Processing-150458?logo=pandas" alt="Pandas"/>
-  <img src="https://img.shields.io/badge/Pytest-Testing-0A9EDC?logo=pytest" alt="Pytest"/>
-  <img src="https://img.shields.io/badge/API-REST-black" alt="REST API"/>
+  <img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/Pydantic-Validation-E92063" alt="Pydantic" />
+  <img src="https://img.shields.io/badge/Pytest-Testing-0A9EDC?logo=pytest&logoColor=white" alt="Pytest" />
+  <img src="https://img.shields.io/badge/API-REST-blue" alt="REST API" />
+</p>
+
+<p align="center">
+  <a href="https://github.com/Harinath125/finance_api">Source Code</a> •
+  <a href="https://github.com/Harinath125/finance_api/issues">Report an Issue</a>
 </p>
 
 ---
 
-## 🌟 Overview
+## 🚀 Overview
 
-The **Financial Opportunity Processing & Eligibility API** is a Python backend application built with FastAPI that processes financial opportunity data, evaluates eligibility against user-defined investment criteria, and ranks qualifying opportunities using a weighted scoring system.
+Financial opportunity data often contains inconsistent formats, missing values, and different representations of risk, tenure, liquidity, and returns. These inconsistencies make reliable comparison difficult.
 
-The service transforms inconsistent CSV records into structured data, validates and normalizes financial fields, applies eligibility rules, and returns ranked results through a REST API.
+This project addresses that challenge through a modular processing pipeline that transforms CSV records into structured opportunities, evaluates mandatory eligibility requirements, and ranks qualifying results according to user preferences.
 
-The project emphasizes **data quality, transparent business rules, modular architecture, explainable ranking, and automated testing**.
+### Key features
 
-### ✨ Key Features
-
-- 📂 **CSV ingestion** — Loads financial opportunity records into the application.
-- 🧹 **Data normalization** — Handles inconsistent currency, tenure, risk, and return representations.
-- ✅ **Eligibility evaluation** — Checks opportunities against investment amount, risk tolerance, tenure, and minimum-return requirements.
-- 📊 **Weighted ranking** — Scores eligible opportunities using configurable business criteria.
-- ⚖️ **Preference-aware recommendations** — Uses category and liquidity preferences as ranking factors.
-- ⚠️ **Validation transparency** — Reports parsing problems through `validation_warnings` rather than silently discarding problematic records.
-- 🚀 **REST API** — Exposes opportunity search and health-check endpoints.
-- 🧪 **Layered automated tests** — Tests validation, eligibility, ranking, and HTTP behavior independently.
-
----
+- **CSV ingestion:** Load financial opportunities from a structured dataset.
+- **Data normalization:** Handle inconsistent currency, tenure, risk, and return representations.
+- **Eligibility engine:** Evaluate budget, risk tolerance, tenure, and minimum-return requirements.
+- **Weighted ranking:** Score eligible opportunities using five distinct factors.
+- **Preference-aware ranking:** Incorporate category and liquidity preferences.
+- **Transparent validation:** Surface malformed fields through `validation_warnings`.
+- **REST API:** Expose opportunity search and health-check endpoints.
+- **Automated testing:** Test validation, eligibility, ranking, and API behavior independently.
 
 ## 🧠 Project Mind Map
 
@@ -40,20 +43,20 @@ mindmap
   root((Financial Opportunity API))
     Data Processing
       CSV Ingestion
-      Field Normalization
-      Validation Issues
+      Normalization
+      Validation Warnings
       Structured Models
     Eligibility Engine
-      Investment Amount
-      Risk Tolerance
+      Investment Budget
+      Risk Compatibility
       Investment Tenure
       Minimum Return
     Ranking Engine
-      Risk Fit
-      Tenure Fit
-      Return Score
-      Budget Efficiency
-      Preference Bonus
+      Risk Fit 30%
+      Tenure Fit 25%
+      Return Score 25%
+      Budget Efficiency 10%
+      Preference Bonus 10%
     REST API
       FastAPI
       Opportunity Search
@@ -64,105 +67,63 @@ mindmap
       Eligibility Tests
       Ranking Tests
       API Tests
-    Reliability
-      Explicit Rules
-      Validation Warnings
-      Reproducible Results
 ```
-
----
 
 ## 🏗️ System Architecture
 
-The application separates data ingestion, validation, eligibility evaluation, ranking, and HTTP request handling.
-
 ```mermaid
 flowchart TD
-    USER["👤 User / API Client"]
-    API["FastAPI Endpoint"]
-    REQUEST["Search Request Validation"]
-    LOADER["CSV Data Loader"]
-    VALIDATOR["Data Normalization and Validation"]
-    MODELS["Structured Opportunity Models"]
-    ELIGIBILITY["Eligibility Engine"]
-    RANKING["Weighted Ranking Engine"]
-    RESPONSE["Ranked JSON Response"]
-    WARNINGS["Validation Warnings"]
-    HEALTH["Health Endpoint"]
-
-    USER --> API
-    API --> REQUEST
-    LOADER --> VALIDATOR
-    VALIDATOR --> MODELS
-    REQUEST --> ELIGIBILITY
-    MODELS --> ELIGIBILITY
-    ELIGIBILITY --> RANKING
-    RANKING --> RESPONSE
-    VALIDATOR -.-> WARNINGS
-    WARNINGS --> RESPONSE
-    USER --> HEALTH
-    HEALTH --> RESPONSE
-```
-
-### 🔍 Request Processing Flow
-
-1. The client submits investment preferences to the search endpoint.
-2. FastAPI validates the incoming request.
-3. The data loader reads the opportunity dataset.
-4. The validator normalizes inconsistent fields and records validation issues.
-5. The eligibility engine determines which opportunities satisfy the hard requirements.
-6. The ranking engine calculates scores for eligible opportunities.
-7. The API returns the ranked results and applicable validation warnings.
-
-*The diagram describes the intended processing flow. Exact execution order and response fields should be confirmed against the current implementation.*
-
----
-
-## ⚙️ Eligibility vs. Ranking
-
-One of the central design decisions is the separation of **hard eligibility requirements** from **soft ranking preferences**.
-
-```mermaid
-flowchart TD
-    A["Raw Opportunity Records"]
-    B["Normalize and Validate"]
-    C{"Pass Hard Eligibility Rules?"}
-    D["Exclude from Eligible Results"]
-    E["Eligible Opportunities"]
-    F["Calculate Weighted Scores"]
-    G["Sort by Ranking Score"]
-    H["Return Ranked Results"]
-
-    A --> B --> C
-    C -- No --> D
-    C -- Yes --> E
-    E --> F
-    F --> G
+    A[API Client] --> B[FastAPI]
+    B --> C[Validate Search Request]
+    D[CSV Opportunity Dataset] --> E[Data Loader]
+    E --> F[Normalize and Validate Records]
+    F --> G[Structured Opportunity Models]
+    C --> H[Eligibility Engine]
     G --> H
+    H --> I{Eligible?}
+    I -->|No| J[Exclude from Results]
+    I -->|Yes| K[Weighted Ranking Engine]
+    K --> L[Sort Opportunities]
+    F -.-> M[Validation Warnings]
+    L --> N[JSON Response]
+    M --> N
+    N --> A
 ```
 
-### Hard eligibility requirements
+### Processing workflow
 
-The eligibility engine evaluates the user's mandatory investment criteria, such as:
+1. The client submits investment criteria.
+2. FastAPI validates the request.
+3. The data loader reads the opportunity dataset.
+4. The validator normalizes financial fields and records validation issues.
+5. The eligibility engine applies mandatory requirements.
+6. The ranking engine scores eligible opportunities.
+7. The API returns ranked results and applicable validation warnings.
 
-- Investment amount and budget constraints
-- Risk compatibility
-- Investment tenure
-- Minimum expected return, when requested
+## ⚖️ Eligibility vs. Ranking
 
-Opportunities with an unparseable or `Variable` return are excluded when a minimum return is required, rather than being assumed to satisfy the requirement.
+A key design decision is to separate **hard eligibility requirements** from **soft ranking preferences**.
 
-### Soft ranking preferences
+```mermaid
+flowchart TD
+    A[Raw Opportunity Records] --> B[Normalize and Validate]
+    B --> C{Pass Mandatory Requirements?}
+    C -->|No| D[Exclude from Eligible Results]
+    C -->|Yes| E[Eligible Opportunities]
+    E --> F[Calculate Ranking Scores]
+    F --> G[Sort by Score]
+    G --> H[Return Ranked Results]
+```
 
-Category and liquidity are treated as preferences that influence ranking instead of automatically disqualifying an opportunity.
+**Hard eligibility requirements** determine whether an opportunity qualifies. These include investment amount, risk compatibility, tenure, and minimum return when specified.
 
-This distinction allows the service to return qualifying opportunities while prioritizing those that better match the user's preferences.
+**Soft preferences** influence the order of qualifying opportunities. Category and liquidity preferences contribute to ranking rather than automatically disqualifying an opportunity.
 
----
+When a minimum return is required, an unparseable or `Variable` return is not assumed to satisfy that requirement.
 
-## 📈 Weighted Ranking Model
+## 📊 Weighted Ranking Model
 
-The ranking engine combines multiple factors into an overall score.
+The ranking engine combines five factors into an overall score.
 
 | Ranking factor | Weight |
 |---|---:|
@@ -173,13 +134,10 @@ The ranking engine combines multiple factors into an overall score.
 | Preference bonus | 10% |
 | **Total** | **100%** |
 
-Conceptually, the overall score is:
+The conceptual scoring formula is:
 
 \[
-\begin{aligned}
-S ={}& 0.30R + 0.25T + 0.25Y\\
-    &+ 0.10B + 0.10P
-\end{aligned}
+S = 0.30R + 0.25T + 0.25Y + 0.10B + 0.10P
 \]
 
 Where:
@@ -190,38 +148,28 @@ Where:
 - \(B\) = budget-efficiency score
 - \(P\) = preference-bonus score
 
-The individual score calculations, normalization ranges, and tie-breaking rules are defined by the implementation. The formula above represents the weighted combination of the five factors.
-
----
+The weights describe each factor's contribution to the total score. The precise score calculations, normalization, and tie-breaking behavior are determined by the implementation.
 
 ## 🛠️ Technology Stack
 
 | Technology | Purpose |
 |---|---|
-| Python 3.10+ | Core programming language |
+| Python | Core application logic |
 | FastAPI | REST API framework |
-| Pydantic | Request and data-model validation |
-| Pandas | Data processing, if used in the implementation |
-| CSV | Opportunity dataset |
+| Pydantic | Request validation and structured models |
+| CSV | Opportunity data source |
+| Uvicorn | ASGI server |
 | Pytest | Automated testing |
-| Uvicorn | ASGI application server |
 
----
-
-## 📁 Project Structure
+## 📂 Project Structure
 
 ```text
-Harinath_Python_Assignment/
-│
-├── README.md
-├── TECHNICAL_NOTE.md
-├── requirements.txt
-│
+finance_api/
 ├── data/
 │   ├── opportunities.csv
 │   ├── sample_queries.csv
 │   └── data_schema.json
-│
+├── sample_output/
 ├── src/
 │   ├── models.py
 │   ├── data_loader.py
@@ -230,70 +178,65 @@ Harinath_Python_Assignment/
 │   ├── ranking.py
 │   ├── api.py
 │   └── main.py
-│
 ├── tests/
 │   ├── test_validator.py
 │   ├── test_eligibility.py
 │   ├── test_ranking.py
 │   └── test_api.py
-│
-└── sample_output/
-    └── Saved request and response examples
+├── TECHNICAL_NOTE.md
+├── requirements.txt
+└── README.md
 ```
 
-### Module Responsibilities
+### Module responsibilities
 
 | Module | Responsibility |
 |---|---|
-| `models.py` | Defines structured opportunity and search-request models |
-| `data_loader.py` | Loads the opportunity dataset |
-| `validator.py` | Normalizes fields and records validation issues |
-| `eligibility.py` | Implements hard eligibility rules |
-| `ranking.py` | Calculates weighted ranking scores |
-| `api.py` | Defines HTTP endpoints and connects application components |
-| `main.py` | Starts the application |
-| `tests/` | Verifies business logic and API behavior |
+| `models.py` | Structured opportunity and request models |
+| `data_loader.py` | Load opportunity records |
+| `validator.py` | Normalize fields and surface validation issues |
+| `eligibility.py` | Apply mandatory eligibility rules |
+| `ranking.py` | Calculate weighted scores and rank results |
+| `api.py` | Define API endpoints |
+| `main.py` | Application entry point |
+| `tests/` | Verify business rules and API behavior |
 
----
-
-## 🚀 Getting Started
+## ⚙️ Getting Started
 
 ### Prerequisites
 
 - Python 3.10 or newer
 - pip
-- Terminal or command prompt
+- Git
 
-### 1. Extract and open the project
-
-Extract `Harinath_Python_Assignment.zip`, then navigate into the extracted project directory.
+### 1. Clone the repository
 
 ```bash
-cd path/to/Harinath_Python_Assignment
+git clone https://github.com/Harinath125/finance_api.git
+cd finance_api
 ```
-
-Replace the example path with your actual directory.
 
 ### 2. Create a virtual environment
 
 On macOS or Linux:
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 On Windows:
 
 ```powershell
-python -m venv venv
-venv\Scripts\activate
+python -m venv .venv
+.venv\Scripts\Activate.ps1
 ```
 
 ### 3. Install dependencies
 
 ```bash
-python -m pip install -r requirements.txt
+python -m pip install --upgrade pip
+pip install -r requirements.txt
 ```
 
 ### 4. Start the API
@@ -302,29 +245,24 @@ python -m pip install -r requirements.txt
 python -m src.main
 ```
 
-The application should start at:
-
-- **Base URL:** http://localhost:8000
-- **Swagger UI:** http://localhost:8000/docs
-- **ReDoc:** http://localhost:8000/redoc
-
 For development with automatic reload:
 
 ```bash
 uvicorn src.api:app --reload
 ```
 
-Use the entry point that matches your application's configuration.
+The local API should be available at `http://localhost:8000`, assuming the default configuration.
 
----
+- Interactive Swagger documentation: [http://localhost:8000/docs](http://localhost:8000/docs)
+- ReDoc documentation: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
 ## 🔎 API Usage
 
 ### Search opportunities
 
-**Endpoint:** `POST /opportunities/search`
+<badge color="info">POST</badge> `/opportunities/search`
 
-**Example request:**
+Example request:
 
 ```json
 {
@@ -337,7 +275,7 @@ Use the entry point that matches your application's configuration.
 }
 ```
 
-**Example cURL command:**
+Example cURL command:
 
 ```bash
 curl -X POST "http://localhost:8000/opportunities/search" \
@@ -352,25 +290,21 @@ curl -X POST "http://localhost:8000/opportunities/search" \
   }'
 ```
 
-The response contains the search results and relevant validation information according to the implemented response schema.
-
-A saved request and response for this example are available in `sample_output/`.
+The response contains the ranked search results and applicable validation information according to the API's response schema.
 
 ### Health check
 
-**Endpoint:** `GET /health`
-
-Use the health endpoint to check whether the service is running and inspect the number of opportunities loaded.
+<badge color="info">GET</badge> `/health`
 
 ```bash
 curl "http://localhost:8000/health"
 ```
 
-For the exact response structure and interactive testing, open `/docs` after starting the server.
+Use this endpoint to check whether the service is responding and inspect the number of opportunities loaded.
 
----
+For the exact response fields, run the application and inspect the interactive API documentation at `/docs`.
 
-## 🧪 Running the Tests
+## 🧪 Running Tests
 
 Run the complete test suite:
 
@@ -378,91 +312,69 @@ Run the complete test suite:
 pytest tests/ -v
 ```
 
-### Test coverage by module
+### Test organization
 
-| Test file | Purpose |
+| Test file | What it verifies |
 |---|---|
-| `test_validator.py` | Parsing, normalization, and validation behavior |
-| `test_eligibility.py` | Eligibility business rules |
+| `test_validator.py` | Field parsing, normalization, and validation |
+| `test_eligibility.py` | Mandatory eligibility rules |
 | `test_ranking.py` | Ranking scores and ordering |
-| `test_api.py` | Endpoint responses, sample request, and error cases |
+| `test_api.py` | Endpoint responses and request handling |
 
-Separating the tests by layer helps isolate business-rule defects from HTTP integration issues.
+The layered test structure helps distinguish business-rule problems from API integration issues.
 
----
+## 💡 Engineering Decisions
 
-## 💡 Important Engineering Decisions
+### 1. Explicit validation warnings
 
-### 1. Validation issues are explicit
+Malformed fields are surfaced through `validation_warnings` rather than being silently discarded. This makes data-quality problems easier to identify.
 
-Malformed fields are represented as `ValidationIssue` objects and exposed through `validation_warnings`, instead of being silently discarded.
+### 2. Separation of concerns
 
-This improves transparency and helps diagnose problems in source data.
+Data loading, validation, eligibility, ranking, and HTTP handling have separate responsibilities. This improves maintainability and allows core business logic to be tested independently.
 
-### 2. Eligibility and ranking are separate
+### 3. Conservative handling of unknown returns
 
-Hard constraints determine which opportunities qualify. Soft preferences influence the ordering of qualifying opportunities.
+When a minimum return is requested, an unknown or unparseable return does not automatically pass the requirement.
 
-This makes the behavior easier to reason about and test.
+### 4. Explainable ranking
 
-### 3. Unknown returns are handled conservatively
+The five ranking factors and their weights are documented, making the overall scoring model easier to inspect and discuss.
 
-When the user specifies a minimum return, an unparseable or `Variable` return does not automatically qualify.
+## 🗺️ Future Improvements
 
-This avoids treating missing or ambiguous financial information as a confirmed pass.
-
-### 4. Business logic can be tested without HTTP
-
-The validator, eligibility engine, and ranking engine have their own tests, allowing core behavior to be checked independently of the FastAPI server.
-
-For additional design rationale, refer to `TECHNICAL_NOTE.md`.
-
----
-
-## 🗺️ Development Roadmap
-
-```mermaid
-flowchart LR
-    A["CSV Ingestion"]
-    B["Data Validation"]
-    C["Eligibility Engine"]
-    D["Ranking Engine"]
-    E["REST API"]
-    F["Automated Tests"]
-    G["Future Enhancements"]
-
-    A --> B --> C --> D --> E --> F --> G
-```
-
-Potential future improvements:
-
-- [ ] Add structured request and response examples to API documentation.
 - [ ] Add performance benchmarks for larger datasets.
+- [ ] Make ranking weights configurable.
 - [ ] Expand edge-case and property-based testing.
-- [ ] Add configurable ranking weights.
-- [ ] Introduce dataset versioning and data-quality reporting.
 - [ ] Add structured logging and request tracing.
-- [ ] Evaluate persistent storage if the dataset grows beyond the current CSV-based design.
+- [ ] Introduce dataset versioning and richer data-quality reports.
+- [ ] Add pagination for larger result sets.
+- [ ] Evaluate persistent storage if CSV-based processing becomes insufficient.
+- [ ] Add API response examples and error schemas.
 
-These items are proposed improvements, not claims of existing functionality.
+These are proposed enhancements, not claims about current functionality.
 
----
+## 🤝 Contributing
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Make your changes.
+4. Run the test suite.
+5. Open a pull request with a clear description.
 
 ## 👨‍💻 Author
 
 **Rayala Harinath**
 
-B.Tech Computer Science & Engineering
-
 - GitHub: [@Harinath125](https://github.com/Harinath125)
-- LinkedIn: [Rayala Harinath](https://linkedin.com/in/rayala-harinath-853300303)
-
----
 
 ## ⚠️ Disclaimer
 
-This project demonstrates financial data processing, eligibility evaluation, ranking logic, and REST API engineering. The output is based on the supplied dataset and implemented rules. It is not personalized financial advice or a guarantee of investment performance.
+This project demonstrates financial data processing, eligibility evaluation, ranking logic, and REST API engineering. Results depend on the supplied dataset and implemented rules. The API does not guarantee investment performance and is not a substitute for professional financial advice.
 
 ---
 
-⭐ If you find this project useful, consider starring the repository!
+<p align="center">
+  <b>Financial Opportunity Processing & Eligibility API</b><br/>
+  Turning inconsistent financial data into structured, explainable rankings.
+</p>

@@ -1,0 +1,113 @@
+{
+    "count": 4,
+    "results": [
+        {
+            "opportunity_id": "OPP020",
+            "name": "Terra Green Energy Debenture",
+            "category": "Corporate Debt",
+            "score": 85.6,
+            "reasons": [
+                "Investment amount meets minimum",
+                "Risk (Moderate) within tolerance (Moderate)",
+                "Tenure fits within 24-24 months",
+                "Expected return (up to 9.7%) meets requested minimum",
+                "Category differs from preference (Debt)",
+                "Liquidity matches preference (Medium)",
+                "Risk fit: Moderate vs tolerance Moderate (100% of budget used)",
+                "Tenure fit: request 24mo inside window 24-24mo",
+                "Return score: 9.7% avg (best in results: 10.5%)",
+                "Budget efficiency: minimum uses 75% of stated investment amount",
+                "Preference bonus: 1/2 optional preference(s) matched"
+            ],
+            "minimum_investment_inr": 150000,
+            "tenure_min_months": 24,
+            "tenure_max_months": 24,
+            "risk": "Moderate",
+            "expected_return_min_pct": 9.7,
+            "expected_return_max_pct": 9.7,
+            "liquidity": "Medium"
+        },
+        {
+            "opportunity_id": "OPP002",
+            "name": "BlueRiver Infrastructure Note",
+            "category": "Structured Credit",
+            "score": 85.0,
+            "reasons": [
+                "Investment amount meets minimum",
+                "Risk (Moderate) within tolerance (Moderate)",
+                "Tenure fits within 24-24 months",
+                "Expected return (up to 10.5%) meets requested minimum",
+                "Category differs from preference (Debt)",
+                "Liquidity matches preference (Medium)",
+                "Risk fit: Moderate vs tolerance Moderate (100% of budget used)",
+                "Tenure fit: request 24mo inside window 24-24mo",
+                "Return score: 10.5% avg (best in results: 10.5%)",
+                "Budget efficiency: minimum uses 100% of stated investment amount",
+                "Preference bonus: 1/2 optional preference(s) matched"
+            ],
+            "minimum_investment_inr": 200000,
+            "tenure_min_months": 24,
+            "tenure_max_months": 24,
+            "risk": "Moderate",
+            "expected_return_min_pct": 10.5,
+            "expected_return_max_pct": 10.5,
+            "liquidity": "Medium"
+        },
+        {
+            "opportunity_id": "OPP025",
+            "name": "Yellowstone Asset Lease",
+            "category": "Asset Leasing",
+            "score": 83.57,
+            "reasons": [
+                "Investment amount meets minimum",
+                "Risk (Moderate) within tolerance (Moderate)",
+                "Tenure fits within 24-24 months",
+                "Expected return (up to 9.9%) meets requested minimum",
+                "Category differs from preference (Debt)",
+                "Liquidity matches preference (Medium)",
+                "Risk fit: Moderate vs tolerance Moderate (100% of budget used)",
+                "Tenure fit: request 24mo inside window 24-24mo",
+                "Return score: 9.9% avg (best in results: 10.5%)",
+                "Budget efficiency: minimum uses 100% of stated investment amount",
+                "Preference bonus: 1/2 optional preference(s) matched"
+            ],
+            "minimum_investment_inr": 200000,
+            "tenure_min_months": 24,
+            "tenure_max_months": 24,
+            "risk": "Moderate",
+            "expected_return_min_pct": 9.9,
+            "expected_return_max_pct": 9.9,
+            "liquidity": "Medium"
+        },
+        {
+            "opportunity_id": "OPP029",
+            "name": "Cobalt Multi Asset Strategy",
+            "category": "Multi Asset",
+            "score": 73.93,
+            "reasons": [
+                "Investment amount meets minimum",
+                "Risk (Moderate) within tolerance (Moderate)",
+                "Tenure fits within 24-36 months",
+                "Expected return (up to 9.0%) meets requested minimum",
+                "Category differs from preference (Debt)",
+                "Liquidity matches preference (Medium)",
+                "Risk fit: Moderate vs tolerance Moderate (100% of budget used)",
+                "Tenure fit: request 24mo inside window 24-36mo",
+                "Return score: 9.0% avg (best in results: 10.5%)",
+                "Budget efficiency: minimum uses 50% of stated investment amount",
+                "Preference bonus: 1/2 optional preference(s) matched"
+            ],
+            "minimum_investment_inr": 100000,
+            "tenure_min_months": 24,
+            "tenure_max_months": 36,
+            "risk": "Moderate",
+            "expected_return_min_pct": 9.0,
+            "expected_return_max_pct": 9.0,
+            "liquidity": "Medium"
+        }
+    ],
+    "validation_warnings": [
+        "[warning] OPP014/expected_return: Return is 'Variable' \u2014 no fixed figure supplied by provider",
+        "[warning] OPP030/opportunity_id: Duplicate opportunity_id (first seen at row 30); this later occurrence is excluded from results"
+    ]
+}

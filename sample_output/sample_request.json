@@ -1,0 +1,8 @@
+{
+  "investment_amount": 200000,
+  "risk": "Moderate",
+  "tenure_months": 24,
+  "minimum_return": 9,
+  "category": "Debt",
+  "liquidity": "Medium"
+}
